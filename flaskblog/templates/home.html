@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form action="" method="post">
+  <input type="submit" name="upvote" value="Upvote" />
+</form>
+<div class="range-wrap">
+  <div class="range-value" id="redV"></div>
+  <input id="red" type="range" min="0" max="255" value="0" step="1" onchange="updateRgb(this.id);">
+</div>
+<div class="range-wrap">
+  <div class="range-value" id="greenV"></div>
+  <input id="green" type="range" min="0" max="255" value="0" step="1">
+</div>
+<div class="range-wrap">
+  <div class="range-value" id="blueV"></div>
+  <input id="blue" type="range" min="0" max="255" value="0" step="1">
+</div>
+<div class="div1" style="background-color:rgb(255,0,0);">rgb(255,0,0)</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous">
+
+  $(document).ready(function(){
+      function hi(){
+          alert('hi');
+      }
+      $("#cep").on("change", hi);
+  });
+
+  // const red = 0, green = 0, blue = 0
+  // function update(r,g,b)
+  // $.ajax({
+  //     type: "POST",
+  //     url: '{{ url_for("main.home") }}',
+  //     data: { 
+  //       r:red,
+  //       g:green,
+  //       b:blue,
+  //     }
+  //   })
+  //   .done(function( msg ) {
+  //       // optional callback stuff if needed
+  //       // alert( "Data Saved: " + msg );
+  //   });
+
+
+  var 
+  red = 0,
+  green = 0,
+  blue = 0
+
+
+  function updateRgb(id) {
+    color = document.getElementById(id),
+    colorV = document.getElementById(concat(id, 'V')),
+    console.log("SODJASOJDOASJDIO")
+    const
+      newColor = Number( (color.value - color.min) * 100 / (color.max - color.min) ),
+      newColorPosition = 10 - (newColor * 0.2);
+    colorV.innerHTML = `<span>${color.value}</span>`;
+    colorV.style.left = `calc(${newColor}% + (${newColorPosition}px))`;
+
+    if (id == "red") {
+      console.log("RED", color.value)
+    }
+    else if (id == "red") {
+      console.log("RED", color.value)
+    }
+    else if (id == "red") {
+      console.log("RED", color.value)
+    }
+    else {
+      console.log("NAH")
+    }
+
+    $.ajax({
+      type: "POST",
+      url: '{{ url_for("main.home") }}',
+      data: { 
+        r:red,
+        g:green,
+        b:blue,
+      }
+    })
+    .done(function( msg ) {
+        // optional callback stuff if needed
+        // alert( "Data Saved: " + msg );
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", updateRgb);
+  red.addEventListener('input', updateRgb);
+  green.addEventListener('input', updateRgb);
+  blue.addEventListener('input', updateRgb);
+</script>
+
+
+
+    
+{% endblock content %}
